@@ -3,7 +3,7 @@ class InAndOut {
     let t=0.001;
   }
 
-  draw(x_pos=40, y_pos=460, length=460, level=100, colour=[0,0,255], colour_fade=[5,3,-5], animation_time=12000, master_rotate=8000)
+  draw(x_pos=40, y_pos=460, length=460, level=100, colour=[0,0,255], colour_fade=[5,3,-5], line_weight=3, animation_time=12000, master_rotate=3000)
   {
     /*
       InAndOut.draw() arguments:
@@ -13,10 +13,12 @@ class InAndOut {
       level = Recursion Depth of Triangles. Default = 100
       colour = Triangle Line colour. Default = [0, 0, 0]
       colour_fade = Add value to colour elementwise every recursive call. Default = [5, 0, -5]
+      line_weight = Thickness of drawn line. Default = 3
       animation_time = Time for one complete loop of the animation in milliseconds. Default = 6000
       master_rotate = Rotational speed for entire object. Default = 0
     */
     stroke(colour);
+    strokeWeight(line_weight);
     let animation_ratio = PI/animation_time;
 
     translate(x_pos+length/2, y_pos - 0.5*(length/2 * tan(PI/3)));
@@ -53,13 +55,12 @@ class InAndOut {
 
 let i = []
 for (let _ = 0; _<10; _++) {
-  i.push(new InAndOut(x_pos=_*30, y_pos=460, length=460));
+  i.push(new InAndOut(x_pos=_*30, y_pos=460, length=460, line_weight=1));
 }
 
 function setup()
 {
   createCanvas(1000, 1000);
-  strokeWeight(3);
 }
 
 function draw()

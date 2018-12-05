@@ -71,6 +71,9 @@ function setup()
 function draw()
 {
   background(255);
+  stroke(0);
+  strokeWeight(1);
+  rect(0, 0, 999, 999);
   i.draw()
 }
 

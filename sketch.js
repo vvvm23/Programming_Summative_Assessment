@@ -62,11 +62,7 @@ class InAndOut {
   }
 }
 
-let i = []
-for (let _ = 0; _<1; _++) {
-  i.push(new InAndOut());
-}
-
+let i = new InAndOut()
 function setup()
 {
   createCanvas(1000, 1000);
@@ -75,7 +71,29 @@ function setup()
 function draw()
 {
   background(255);
-  for (let _ = 0; _<1; _++) {
-    i[_].draw();
-  }
+  i.draw()
+}
+
+function form_change_handler() {
+  console.log("Form changed");
+  var xp = document.getElementById("x").value;
+  var yp = document.getElementById("y").value;
+  var len = document.getElementById("length").value;
+  var lvl = document.getElementById("level").value;
+  var col = document.getElementById("colour").value;
+  var colf = document.getElementById("colour_fade").value;
+  var lw = document.getElementById("line_weight").value;
+  var at = document.getElementById("animation_time").value;
+  var mt = document.getElementById("master_time").value;
+  console.log(xp, yp, len, lvl, col, colf, lw, at, mt)
+
+  i.x_pos = parseInt(xp);
+  i.y_pos = parseInt(yp);
+  i.length = parseInt(len);
+  i.level = parseInt(lvl);
+  i.colour = col.split(',').map(function(_) {return parseInt(_)});
+  i.colour_fade = colf.split(',').map(function(_) {return parseInt(_)});
+  i.line_weight = parseInt(lw);
+  i.animation_time = parseInt(at);
+  i.master_rotate = parseInt(mt);
 }

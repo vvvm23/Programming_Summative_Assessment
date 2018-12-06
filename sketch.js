@@ -1,5 +1,5 @@
 class InAndOut {
-	constructor(x_pos=40, y_pos=460, length=460, level=100, colour=[0,0,0], colour_fade=[0,0,0], line_weight=1, animation_time=12000, master_rotate=3000) {
+	constructor(x_pos=40, y_pos=460, length=460, level=100, colour=[0,0,0], colour_fade=[0,0,0], line_weight=1, animation_time=6000, master_rotate=0) {
 		/*
         InAndOut.constructor() arguments:
         x_pos = x position of bottom left corner of triangle. Default = 40

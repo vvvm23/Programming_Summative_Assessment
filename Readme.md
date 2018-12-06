@@ -1,9 +1,29 @@
 # In and Out animation object documentation #
 ## Description ##
+Animation in p5 that generates a recursive "triangle-within-triangle" structure that oscilliates in and out in a harmonic fashion. Optional parameters to adjust position in canvas, size, colour and more.
 
 ---
+## Requirements ##
+* p5
+* computer newer than 1982
+* that's it champ
+---
+## Usage ##
+```javascript
+  i = new InAndOut(); // Add optional arguments here
+
+  function setup() {
+    // Your setup procedure here
+  }
+
+  function draw(){
+    // Other drawing procedures here
+    i.draw();
+  }
+```
+---
 ## Arguments ##
-####constructor####
+#### constructor
 ```
   x_pos: X position of bottom left corner of triangle. Default = 40
   y_pos: Y position of bottom left corner of triangle. Default = 460
@@ -15,10 +35,64 @@
   animation_time: Time for one complete loop of the animation in milliseconds. Default = 6000
   master_rotate: Time for one rotation of entire object in milliseconds. Default = 0
 ```
+#### draw ####
+```
+  draw() has no arguments
+```
 ---
 
 ## Examples ##
+#### Example 1 ####
+```javascript
+/* Create new object at x = 500, y = 500 of size = 200
+  Recursion depth of 100, colour Blue with a fade of [3, 0, -3]*/
+i = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3]);
+
+function setup() {
+  // Your setup procedure here
+}
+
+function draw(){
+  // Other drawing procedures here
+  i.draw();
+}  
+```
+#### Example 2 ####
+```javascript
+// Define multiple objects and draw them together
+i = []
+i[0] = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3]);
+i[1] = new InAndOut(400, 500, 200, 100, [0, 255, 0], [3, -3, 3]);
+i[2] = new InAndOut(300, 500, 200, 100, [255, 0, 0], [-3, 0, 3]);
+
+function setup() {
+  // Your setup procedure here
+}
+
+function draw(){
+  // Other drawing procedures here
+  for (let _ = 0; _ < 3; _++){
+    i[_].draw();  
+  }
+}  
+```
+#### Example 3 ####
+```javascript
+  // Define rotating object with increased line weight.
+  i = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3], 3, 1500, 3000);
+
+  function setup() {
+    // Your setup procedure here
+  }
+
+  function draw(){
+    // Other drawing procedures here
+    i.draw();
+  }  
+```
 ---
 
 ## Original Source ##
+
+[Original Source in Processing here](https://www.openprocessing.org/sketch/563267)
 ---

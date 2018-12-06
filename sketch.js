@@ -25,39 +25,48 @@ class InAndOut {
 
   draw()
   {
-    let colour = this.colour;
-    let level = this.level;
-    stroke(colour);
-    strokeWeight(this.line_weight);
-    let animation_ratio = PI/this.animation_time;
+    /*
+      Call this function in the p5 draw() master function in order to draw and update the InAndOut object every frame.
+    */
+    let colour = this.colour; // Place this.colour in a local variable so to avoid changing original value if colour_fade enabled
+    let level = this.level; // Likewise, place this.level in a local variable so original value is remembered.
+    strokeWeight(this.line_weight); // Set thickness of the line
+    let animation_ratio = PI/this.animation_time; // Determine value to multiply ratio by. PI/time
 
+    // Translate to centre of screen and then rotate before then translating back to origin.
     translate(this.x_pos+this.length/2, this.y_pos - 0.5*(this.length/2 * tan(PI/3)));
     rotate(PI/this.master_rotate*millis());
     translate(-(this.x_pos+this.length/2), -this.y_pos + 0.5*(this.length/2 * tan(PI/3)))
 
+    // Call harom function
     this.harom(this.x_pos + this.length, this.y_pos, this.x_pos, this.y_pos, level, (sin(animation_ratio*millis()%(2*PI))+1)/2, colour, this.colour_fade);
   }
 
   harom(ax, ay, bx, by, level, ratio, colour, colour_fade)
   {
-    stroke(colour)
-    if(level!=0){
-    let vx=bx-ax;
-    let vy=by-ay;
-    let nx=cos(PI/3)*vx-sin(PI/3)*vy;
-    let ny=sin(PI/3)*vx+cos(PI/3)*vy;
-    let cx=ax+nx;
-    let cy=ay+ny;
-    line(ax,ay,bx,by);
-    line(ax,ay,cx,cy);
-    line(cx,cy,bx,by);
+    stroke(colour) // Set colour of line
+    if(level!=0) // If level > 0 then continue recursive operation
+    {
+      // Calculate new coordinates of triangle points
+      let vx=bx-ax;
+      let vy=by-ay;
+      let nx=cos(PI/3)*vx-sin(PI/3)*vy;
+      let ny=sin(PI/3)*vx+cos(PI/3)*vy;
+      let cx=ax+nx;
+      let cy=ay+ny;
+      // Draw lines from point to point
+      line(ax,ay,bx,by);
+      line(ax,ay,cx,cy);
+      line(cx,cy,bx,by);
 
-    let n_colour = [0,0,0]
-    n_colour[0] = colour[0] + colour_fade[0]
-    n_colour[1] = colour[1] + colour_fade[1]
-    n_colour[2] = colour[2] + colour_fade[2]
+      // Add colour_fade to colour elementwise
+      let n_colour = [0, 0, 0];
+      n_colour[0] = colour[0] + colour_fade[0];
+      n_colour[1] = colour[1] + colour_fade[1];
+      n_colour[2] = colour[2] + colour_fade[2];
 
-    this.harom(ax*ratio+cx*(1-ratio),ay*ratio+cy*(1-ratio),ax*(1-ratio)+bx*ratio,ay*(1-ratio)+by*ratio,level-1,ratio, n_colour, colour_fade);
+      // Call harom recursively with updated arguments
+      this.harom(ax*ratio+cx*(1-ratio),ay*ratio+cy*(1-ratio),ax*(1-ratio)+bx*ratio,ay*(1-ratio)+by*ratio,level-1,ratio, n_colour, colour_fade);
     }
   }
 }
@@ -70,15 +79,18 @@ function setup()
 
 function draw()
 {
+  // Clear screen
   background(255);
+
+  // Draw box around canvas
   stroke(0);
   strokeWeight(1);
   rect(0, 0, 999, 999);
-  i.draw()
+  i.draw() // Call object draw
 }
 
 function form_change_handler() {
-  console.log("Form changed");
+  // Get values from html form
   var xp = document.getElementById("x").value;
   var yp = document.getElementById("y").value;
   var len = document.getElementById("length").value;
@@ -88,14 +100,14 @@ function form_change_handler() {
   var lw = document.getElementById("line_weight").value;
   var at = document.getElementById("animation_time").value;
   var mt = document.getElementById("master_time").value;
-  console.log(xp, yp, len, lvl, col, colf, lw, at, mt)
 
+  // Set object attributes to new values
   i.x_pos = parseInt(xp);
   i.y_pos = parseInt(yp);
   i.length = parseInt(len);
   i.level = parseInt(lvl);
-  i.colour = col.split(',').map(function(_) {return parseInt(_)});
-  i.colour_fade = colf.split(',').map(function(_) {return parseInt(_)});
+  i.colour = col.split(',').map(function(_) {return parseInt(_)}); // Parse comma delimited
+  i.colour_fade = colf.split(',').map(function(_) {return parseInt(_)}); // Parse comma delimited
   i.line_weight = parseInt(lw);
   i.animation_time = parseInt(at);
   i.master_rotate = parseInt(mt);

@@ -31,11 +31,11 @@ class InAndOut {
 		let colour = this.colour; // Place this.colour in a local variable so to avoid changing original value if colour_fade enabled
 		let level = this.level; // Likewise, place this.level in a local variable so original value is remembered.
 		strokeWeight(this.line_weight); // Set thickness of the line
-		let animation_ratio = PI/this.animation_time; // Determine value to multiply ratio by. PI/time
+		let animation_ratio = 2*PI/this.animation_time; // Determine value to multiply ratio by. PI/time
 
 		// Translate to centre of screen and then rotate before then translating back to origin.
 		translate(this.x_pos+this.length/2, this.y_pos - 0.5*(this.length/2 * tan(PI/3)));
-		rotate(PI/this.master_rotate*millis());
+		rotate(2*PI/this.master_rotate*millis());
 		translate(-(this.x_pos+this.length/2), -this.y_pos + 0.5*(this.length/2 * tan(PI/3)));
 
 		// Call harom function
@@ -74,7 +74,7 @@ class InAndOut {
 let i = new InAndOut();
 function setup()
 {
-	let cnv = createCanvas(1000, 1000);
+	let cnv = createCanvas(window.innerWidth*0.75, window.innerHeight);
 }
 
 function draw()
@@ -85,7 +85,7 @@ function draw()
 	// Draw box around canvas
 	stroke(0);
 	strokeWeight(1);
-	rect(0, 0, 999, 999);
+	rect(0, 0, window.innerWidth*0.75 - 1, window.innerHeight - 1);
 	i.draw(); // Call object draw
 }
 

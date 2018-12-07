@@ -1,0 +1,19 @@
+{
+  "name": "programming_summative_assessment",
+  "version": "1.0.0",
+  "description": "Animation in p5 that generates a recursive \"triangle-within-triangle\" structure that oscilliates in and out in a harmonic fashion. Optional parameters to adjust position in canvas, size, colour and more.",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vvvm23/Programming_Summative_Assessment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vvvm23/Programming_Summative_Assessment/issues"
+  },
+  "homepage": "https://github.com/vvvm23/Programming_Summative_Assessment#readme"
+}

@@ -5,8 +5,7 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
 ---
 ## Requirements ##
 * p5
-* computer newer than 1982
-* that's it champ
+* ESCRIPT 2018
 ---
 ## Usage ##
 ```javascript
@@ -23,7 +22,7 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
 ```
 ---
 ## Arguments ##
-#### constructor
+#### constructor(x_pos, y_pos, length, level, colour, colour_fade, line_weight, animation_time, master_rotate)
 ```
   x_pos: X position of bottom left corner of triangle. Default = 40
   y_pos: Y position of bottom left corner of triangle. Default = 460
@@ -35,7 +34,7 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
   animation_time: Time for one complete loop of the animation in milliseconds. Default = 6000
   master_rotate: Time for one rotation of entire object in milliseconds. Default = 0
 ```
-#### draw ####
+#### draw() ####
 ```
   draw() has no arguments
 ```

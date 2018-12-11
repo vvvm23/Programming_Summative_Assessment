@@ -9,15 +9,18 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
 ---
 ## Usage ##
 ```javascript
-  i = new InAndOut(); // Add optional arguments here
+  var i;
+  var cnv; // Add optional arguments here
 
   function setup() {
+    i = new InAndOut();
+    cnv = createCanvas(canvasWidth, canvasHeight)
     // Your setup procedure here
   }
 
   function draw(){
     // Other drawing procedures here
-    i.draw();
+    i.draw(cnv);
   }
 ```
 ---
@@ -45,48 +48,55 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
 ```javascript
 /* Create new object at x = 500, y = 500 of size = 200
   Recursion depth of 100, colour Blue with a fade of [3, 0, -3]*/
-i = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3]);
-
-function setup() {
+var i;
+var cnv;
+function setup()
+  i = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3]);
+  cnv = createCanvas(1000, 1000);
   // Your setup procedure here
 }
 
 function draw(){
   // Other drawing procedures here
-  i.draw();
+  i.draw(cnv);
 }  
 ```
 #### Example 2 ####
 ```javascript
 // Define multiple objects and draw them together
-i = []
-i[0] = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3]);
-i[1] = new InAndOut(400, 500, 200, 100, [0, 255, 0], [3, -3, 3]);
-i[2] = new InAndOut(300, 500, 200, 100, [255, 0, 0], [-3, 0, 3]);
-
+var i = []
+var cnv
 function setup() {
+  cnv = createCanvas(1000, 1000)
+  i[0] = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3]);
+  i[1] = new InAndOut(400, 500, 200, 100, [0, 255, 0], [3, -3, 3]);
+  i[2] = new InAndOut(300, 500, 200, 100, [255, 0, 0], [-3, 0, 3]);
   // Your setup procedure here
 }
 
 function draw(){
   // Other drawing procedures here
   for (let _ = 0; _ < 3; _++){
-    i[_].draw();  
+    i[_].draw(cnv);  
   }
 }  
 ```
 #### Example 3 ####
 ```javascript
   // Define rotating object with increased line weight.
-  i = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3], 3, 1500, 3000);
 
+
+  var i
+  var cnv
   function setup() {
+    cnv = createCanvas(1000, 1000);
+    i = new InAndOut(500, 500, 200, 100, [0, 0, 255], [3, 0, -3], 3, 1500, 3000);
     // Your setup procedure here
   }
 
   function draw(){
     // Other drawing procedures here
-    i.draw();
+    i.draw(cnv);
   }  
 ```
 ---

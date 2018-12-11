@@ -3,7 +3,9 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended",
+		"p5js",
+		"p5js/dom"],
     "parserOptions": {
         "ecmaVersion": 2018
     },

@@ -73,12 +73,12 @@ class InAndOut {
 	}
 }
 
-var i
-var cnv
+var i;
+var cnv;
 function setup()
 {
 	cnv = createCanvas(window.innerWidth*0.75, window.innerHeight);
-	cnv.parent('canvas')
+	cnv.parent("canvas");
 	i = new InAndOut();
 	frameRate(60);
 }
@@ -120,5 +120,5 @@ function form_change_handler() {
 }
 
 function windowResized() {
-	resizeCanvas(window.innerWidth * 0.75, window.innerHeight)
+	resizeCanvas(window.innerWidth * 0.75, window.innerHeight);
 }

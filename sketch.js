@@ -21,9 +21,11 @@ class InAndOut {
 		this.line_weight = line_weight;
 		this.animation_time = animation_time;
 		this.master_rotate = master_rotate;
+
+		//var faf = 42; use this thing
 	}
 
-	draw()
+	draw() // TODO: p5 optional renderer
 	{
 		/*
       Call this function in the p5 draw() master function in order to draw and update the InAndOut object every frame.
@@ -40,6 +42,7 @@ class InAndOut {
 
 		// Call harom function
 		this.harom(this.x_pos + this.length, this.y_pos, this.x_pos, this.y_pos, level, (sin(animation_ratio*millis()%(2*PI))+1)/2, colour, this.colour_fade);
+		//r.remove();
 	}
 
 	harom(ax, ay, bx, by, level, ratio, colour, colour_fade)

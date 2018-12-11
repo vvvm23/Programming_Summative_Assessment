@@ -34,9 +34,9 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
   animation_time: Time for one complete loop of the animation in milliseconds. Default = 6000
   master_rotate: Time for one rotation of entire object in milliseconds. Default = 0
 ```
-#### draw() ####
+#### draw(r) ####
 ```
-  draw() has no arguments
+  r: Graphic or Canvas to draw object on. p5.Renderer object. No default value as must be explicitly referenced.
 ```
 ---
 

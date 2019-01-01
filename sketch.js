@@ -25,28 +25,28 @@ class InAndOut {
 		//var faf = 42; use this thing
 	}
 
-	draw(r) // TODO: p5 optional renderer
+	draw(r=null) // TODO: p5 optional renderer
 	{
 		/*
       Call this function in the p5 draw() master function in order to draw and update the InAndOut object every frame.
     */
 		let colour = this.colour; // Place this.colour in a local variable so to avoid changing original value if colour_fade enabled
 		let level = this.level; // Likewise, place this.level in a local variable so original value is remembered.
-		r.strokeWeight(this.line_weight); // Set thickness of the line
+		strokeWeight(this.line_weight, r); // Set thickness of the line
 		let animation_ratio = 2*PI/this.animation_time; // Determine value to multiply ratio by. PI/time
 
 		// Translate to centre of screen and then rotate before then translating back to origin.
-		r.translate(this.x_pos+this.length/2, this.y_pos - 0.5*(this.length/2 * tan(PI/3)));
-		r.rotate(2*PI/this.master_rotate*millis());
-		r.translate(-(this.x_pos+this.length/2), -this.y_pos + 0.5*(this.length/2 * tan(PI/3)));
+		translate(this.x_pos+this.length/2, this.y_pos - 0.5*(this.length/2 * tan(PI/3)), r);
+		rotate(2*PI/this.master_rotate*millis(), r);
+		translate(-(this.x_pos+this.length/2), -this.y_pos + 0.5*(this.length/2 * tan(PI/3)), r);
 
 		// Call harom function
-		this.harom(r, this.x_pos + this.length, this.y_pos, this.x_pos, this.y_pos, level, (sin(animation_ratio*millis()%(2*PI))+1)/2, colour, this.colour_fade);
+		this.harom(this.x_pos + this.length, this.y_pos, this.x_pos, this.y_pos, level, (sin(animation_ratio*millis()%(2*PI))+1)/2, colour, this.colour_fade, r);
 	}
 
-	harom(r, ax, ay, bx, by, level, ratio, colour, colour_fade)
+	harom(ax, ay, bx, by, level, ratio, colour, colour_fade, r=null)
 	{
-		r.stroke(colour); // Set colour of line
+		stroke(colour, r); // Set colour of line
 		if(level!=0) // If level > 0 then continue recursive operation
 		{
 			// Calculate new coordinates of triangle points
@@ -57,9 +57,9 @@ class InAndOut {
 			let cx=ax+nx;
 			let cy=ay+ny;
 			// Draw lines from point to point
-			r.line(ax,ay,bx,by);
-			r.line(ax,ay,cx,cy);
-			r.line(cx,cy,bx,by);
+			line(ax,ay,bx,by, r);
+			line(ax,ay,cx,cy, r);
+			line(cx,cy,bx,by, r);
 
 			// Add colour_fade to colour elementwise
 			let n_colour = [0, 0, 0];
@@ -68,7 +68,7 @@ class InAndOut {
 			n_colour[2] = colour[2] + colour_fade[2];
 
 			// Call harom recursively with updated arguments
-			this.harom(r, ax*ratio+cx*(1-ratio),ay*ratio+cy*(1-ratio),ax*(1-ratio)+bx*ratio,ay*(1-ratio)+by*ratio,level-1,ratio, n_colour, colour_fade);
+			this.harom(ax*ratio+cx*(1-ratio),ay*ratio+cy*(1-ratio),ax*(1-ratio)+bx*ratio,ay*(1-ratio)+by*ratio,level-1,ratio, n_colour, colour_fade, r);
 		}
 	}
 }
@@ -92,7 +92,7 @@ function draw()
 	stroke(0);
 	strokeWeight(1);
 	rect(0, 0, window.innerWidth*0.75 - 1, window.innerHeight - 1);
-	i.draw(cnv); // Call object draw
+	i.draw(); // Call object draw
 }
 
 function form_change_handler() {

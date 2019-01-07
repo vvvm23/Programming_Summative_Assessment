@@ -1,45 +1,45 @@
 // Wrapper functions to enable use of optional renderer in sketch.js
-function strokeWeight(weight, r=null) {
-    if (r==null) {
-        r.strokeWeight(weight);
-    }
-    else {
+function w_strokeWeight(weight, r=undefined) {
+    if (r==undefined) {
         strokeWeight(weight);
     }
+    else {
+        r.strokeWeight(weight);
+    }
 }
 
-function translate(d_x, d_y, r=null) {
-    if (r==null) {
-        r.translate(d_x, d_y);
-    }
-    else {
+function w_translate(d_x, d_y, r=undefined) {
+    if (r==undefined) {
         translate(d_x, d_y);
     }
+    else {
+        r.translate(d_x, d_y);
+    }
 }
 
-function rotate(theta, r=null) {
-    if (r==null) {
-        r.rotate(theta);
-    }
-    else {
+function w_rotate(theta, r=undefined) {
+    if (r==undefined) {
         rotate(theta);
     }
+    else {
+        r.rotate(theta);
+    }
 }
 
-function stroke(colour, r=null) {
-    if (r==null) {
-        r.stroke(colour);
-    }
-    else {
+function w_stroke(colour, r=undefined) {
+    if (r==undefined) {
         stroke(colour);
     }
+    else {
+        r.stroke(colour);
+    }
 }
 
-function line(s_x, s_y, e_x, e_y, r=null) {
-    if (r==null) {
-        r.line(s_x, s_y, e_x, e_y);
+function w_line(s_x, s_y, e_x, e_y, r=undefined) {
+    if (r==undefined) {
+        line(s_x, s_y, e_x, e_y);
     }
     else {
-        line(s_x, s_y, e_x, e_y);
+        r.line(s_x, s_y, e_x, e_y);
     }
 }

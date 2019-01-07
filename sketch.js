@@ -32,13 +32,13 @@ class InAndOut {
     */
 		let colour = this.colour; // Place this.colour in a local variable so to avoid changing original value if colour_fade enabled
 		let level = this.level; // Likewise, place this.level in a local variable so original value is remembered.
-		strokeWeight(this.line_weight, r); // Set thickness of the line
+		w_strokeWeight(this.line_weight, r); // Set thickness of the line
 		let animation_ratio = 2*PI/this.animation_time; // Determine value to multiply ratio by. PI/time
 
 		// Translate to centre of screen and then rotate before then translating back to origin.
-		translate(this.x_pos+this.length/2, this.y_pos - 0.5*(this.length/2 * tan(PI/3)), r);
-		rotate(2*PI/this.master_rotate*millis(), r);
-		translate(-(this.x_pos+this.length/2), -this.y_pos + 0.5*(this.length/2 * tan(PI/3)), r);
+		w_translate(this.x_pos+this.length/2, this.y_pos - 0.5*(this.length/2 * tan(PI/3)), r);
+		w_rotate(2*PI/this.master_rotate*millis(), r);
+		w_translate(-(this.x_pos+this.length/2), -this.y_pos + 0.5*(this.length/2 * tan(PI/3)), r);
 
 		// Call harom function
 		this.harom(this.x_pos + this.length, this.y_pos, this.x_pos, this.y_pos, level, (sin(animation_ratio*millis()%(2*PI))+1)/2, colour, this.colour_fade, r);
@@ -46,7 +46,7 @@ class InAndOut {
 
 	harom(ax, ay, bx, by, level, ratio, colour, colour_fade, r=null)
 	{
-		stroke(colour, r); // Set colour of line
+		w_stroke(colour, r); // Set colour of line
 		if(level!=0) // If level > 0 then continue recursive operation
 		{
 			// Calculate new coordinates of triangle points
@@ -57,9 +57,9 @@ class InAndOut {
 			let cx=ax+nx;
 			let cy=ay+ny;
 			// Draw lines from point to point
-			line(ax,ay,bx,by, r);
-			line(ax,ay,cx,cy, r);
-			line(cx,cy,bx,by, r);
+			w_line(ax,ay,bx,by, r);
+			w_line(ax,ay,cx,cy, r);
+			w_line(cx,cy,bx,by, r);
 
 			// Add colour_fade to colour elementwise
 			let n_colour = [0, 0, 0];
@@ -81,6 +81,7 @@ function setup()
 	cnv.parent("canvas");
 	i = new InAndOut();
 	frameRate(60);
+	form_change_handler();
 }
 
 function draw()

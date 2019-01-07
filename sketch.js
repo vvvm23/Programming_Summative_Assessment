@@ -77,7 +77,7 @@ var i;
 var cnv;
 function setup()
 {
-	cnv = createCanvas(window.innerWidth*0.75, window.innerHeight);
+	cnv = createCanvas(window.innerWidth*0.75, window.innerHeight*0.95);
 	cnv.parent("canvas");
 	i = new InAndOut();
 	frameRate(60);
@@ -92,7 +92,7 @@ function draw()
 	// Draw box around canvas
 	stroke(0);
 	strokeWeight(1);
-	rect(0, 0, window.innerWidth*0.75 - 1, window.innerHeight - 1);
+	rect(0, 0, window.innerWidth*0.75 - 1, window.innerHeight*0.95 - 1);
 	i.draw(); // Call object draw
 }
 

@@ -1,4 +1,5 @@
 class InAndOut {
+	/* No Set or Get methods in this class as they are redundant in this use case */
 	constructor(x_pos=40, y_pos=460, length=460, level=100, colour=[0,0,0], colour_fade=[0,0,0], line_weight=1, animation_time=6000, master_rotate=0) {
 		/*
         InAndOut.constructor() arguments:
@@ -75,6 +76,7 @@ class InAndOut {
 
 var i;
 var cnv;
+var cnv_2;
 function setup()
 {
 	cnv = createCanvas(window.innerWidth*0.75, window.innerHeight*0.95);
@@ -87,13 +89,12 @@ function setup()
 function draw()
 {
 	// Clear screen
-	background(255);
-
+	cnv.background(255);
 	// Draw box around canvas
-	stroke(0);
-	strokeWeight(1);
+	cnv.stroke(0);
+	cnv.strokeWeight(1);
 	rect(0, 0, window.innerWidth*0.75 - 1, window.innerHeight*0.95 - 1);
-	i.draw(); // Call object draw
+	i.draw(cnv); // Call object draw
 }
 
 function form_change_handler() {

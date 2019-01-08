@@ -36,11 +36,11 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
   line_weight: Thickness of drawn line. Default = 1
   animation_time: Time for one complete loop of the animation in milliseconds. Default = 6000
   master_rotate: Time for one rotation of entire object in milliseconds. Default = 0
-```
+  ```
 #### draw(r) ####
 ```
-  r: Graphic or Canvas to draw object on. p5.Renderer object. No default value as must be explicitly referenced.
-```
+  r: Graphic or Canvas to draw object on. p5.Renderer object.
+  If none passed then default renderer used.```
 ---
 
 ## Examples ##
@@ -84,8 +84,6 @@ function draw(){
 #### Example 3 ####
 ```javascript
   // Define rotating object with increased line weight.
-
-
   var i
   var cnv
   function setup() {

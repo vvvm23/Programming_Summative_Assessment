@@ -30,7 +30,7 @@ class InAndOut {
 	{
 		/*
       Call this function in the p5 draw() master function in order to draw and update the InAndOut object every frame.
-    */
+    	*/
 		let colour = this.colour; // Place this.colour in a local variable so to avoid changing original value if colour_fade enabled
 		let level = this.level; // Likewise, place this.level in a local variable so original value is remembered.
 		w_strokeWeight(this.line_weight, r); // Set thickness of the line
@@ -76,14 +76,12 @@ class InAndOut {
 
 var i;
 var cnv;
-var cnv_2;
 function setup()
 {
 	cnv = createCanvas(window.innerWidth*0.75, window.innerHeight*0.95);
 	cnv.parent("canvas");
 	i = new InAndOut();
 	frameRate(60);
-	form_change_handler();
 }
 
 function draw()
@@ -97,30 +95,37 @@ function draw()
 	i.draw(cnv); // Call object draw
 }
 
-function form_change_handler() {
-	// Get values from html form
-	var xp = document.getElementById("x").value;
-	var yp = document.getElementById("y").value;
-	var len = document.getElementById("length").value;
-	var lvl = document.getElementById("level").value;
-	var col = document.getElementById("colour").value;
-	var colf = document.getElementById("colour_fade").value;
-	var lw = document.getElementById("line_weight").value;
-	var at = document.getElementById("animation_time").value;
-	var mt = document.getElementById("master_time").value;
-
-	// Set object attributes to new values
-	i.x_pos = parseInt(xp);
-	i.y_pos = parseInt(yp);
-	i.length = parseInt(len);
-	i.level = parseInt(lvl);
-	i.colour = col.split(",").map(function(_) {return parseInt(_);}); // Parse comma delimited
-	i.colour_fade = colf.split(",").map(function(_) {return parseInt(_);}); // Parse comma delimited
-	i.line_weight = parseInt(lw);
-	i.animation_time = parseInt(at);
-	i.master_rotate = parseInt(mt);
-}
-
 function windowResized() {
 	resizeCanvas(window.innerWidth * 0.75, window.innerHeight);
 }
+
+// Event listener when DOM is loaded
+document.addEventListener("DOMContentLoaded", function() {
+	// Get element objects
+	var xp = document.getElementById("x");
+	var yp = document.getElementById("y");
+	var len = document.getElementById("length");
+	var lvl = document.getElementById("level");
+	var col = document.getElementById("colour");
+	var colf = document.getElementById("colour_fade");
+	var lw = document.getElementById("line_weight");
+	var at = document.getElementById("animation_time");
+	var mt = document.getElementById("master_time");
+
+	// Event listener for each input field
+	xp.addEventListener("input", function(event){i.x_pos = parseInt(document.getElementById("x").value);});
+	yp.addEventListener("input", function(event){i.y_pos = parseInt(document.getElementById("y").value);});
+	len.addEventListener("input", function(event){i.length = parseInt(document.getElementById("length").value);});
+	lvl.addEventListener("input", function(event){i.level = parseInt(document.getElementById("level").value);});
+	col.addEventListener("input", function(event){i.colour = col.value.split(",").map(function(_) {return parseInt(_)});});
+	colf.addEventListener("input", function(event){i.colour_fade = colf.value.split(",").map(function(_) {return parseInt(_)});});
+	lw.addEventListener("input", function(event){i.line_weight = parseInt(document.getElementById("line_weight").value);});
+	at.addEventListener("input", function(event){i.animation_time = parseInt(document.getElementById("animation_time").value);});
+	mt.addEventListener("input", function(event){i.master_rotate = parseInt(document.getElementById("master_time").value);});
+
+	// Override default form submission behaviour
+	var cf = document.getElementById("form");
+	cf.addEventListener("submit", function(event){
+		event.preventDefault();
+	});
+});

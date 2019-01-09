@@ -41,7 +41,8 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
 ```
   r: Graphic or Canvas to draw object on. p5.Renderer object.
   If none passed then default renderer used.```
-#### harom(ax, ay, bx, by, level, ratio, colour, colour_fade, r)####
+
+#### harom(ax, ay, bx, by, level, ratio, colour, colour_fade, r) ####
 ```
   ax: X coordinate of corner a of triangle
   ay: Y coordinate of corner a of triangle
@@ -51,7 +52,8 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
   ratio: Ratio from a and b to place new corners in next call of harom
   colour: Triangle line colour as array.
   colour_fade: Value to add to colour each recursive call.
-  r: Graphic or Canvas to draw object on. p5.renderer object. If nothing passed then default renderer is used.```
+  r: Graphic or Canvas to draw object on. p5.renderer object. If nothing passed then default renderer is used.
+  ```
 ---
 
 ## Examples ##

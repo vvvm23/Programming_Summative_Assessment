@@ -37,12 +37,11 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
   animation_time: Time for one complete loop of the animation in milliseconds. Default = 6000
   master_rotate: Time for one rotation of entire object in milliseconds. Default = 0
   ```
-#### draw(r) ####
+#### draw(r)
 ```
   r: Graphic or Canvas to draw object on. p5.Renderer object.
   If none passed then default renderer used.```
-
-#### harom(ax, ay, bx, by, level, ratio, colour, colour_fade, r) ####
+#### harom(ax, ay, bx, by, level, ratio, colour, colour_fade, r)
 ```
   ax: X coordinate of corner a of triangle
   ay: Y coordinate of corner a of triangle

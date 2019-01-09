@@ -117,8 +117,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	yp.addEventListener("input", function(event){i.y_pos = parseInt(document.getElementById("y").value);});
 	len.addEventListener("input", function(event){i.length = parseInt(document.getElementById("length").value);});
 	lvl.addEventListener("input", function(event){i.level = parseInt(document.getElementById("level").value);});
-	col.addEventListener("input", function(event){i.colour = col.value.split(",").map(function(_) {return parseInt(_)});});
-	colf.addEventListener("input", function(event){i.colour_fade = colf.value.split(",").map(function(_) {return parseInt(_)});});
+	col.addEventListener("input", function(event){i.colour = col.value.split(",").map(function(_) {return parseInt(_);});});
+	colf.addEventListener("input", function(event){i.colour_fade = colf.value.split(",").map(function(_) {return parseInt(_);});});
 	lw.addEventListener("input", function(event){i.line_weight = parseInt(document.getElementById("line_weight").value);});
 	at.addEventListener("input", function(event){i.animation_time = parseInt(document.getElementById("animation_time").value);});
 	mt.addEventListener("input", function(event){i.master_rotate = parseInt(document.getElementById("master_time").value);});

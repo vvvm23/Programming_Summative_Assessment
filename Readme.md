@@ -41,6 +41,17 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
 ```
   r: Graphic or Canvas to draw object on. p5.Renderer object.
   If none passed then default renderer used.```
+#### harom(ax, ay, bx, by, level, ratio, colour, colour_fade, r)####
+```
+  ax: X coordinate of corner a of triangle
+  ay: Y coordinate of corner a of triangle
+  bx: X coordinate of corner b of triangle
+  by: Y coordinate of corner b of triangle
+  level: Amount of recursive calls until termination
+  ratio: Ratio from a and b to place new corners in next call of harom
+  colour: Triangle line colour as array.
+  colour_fade: Value to add to colour each recursive call.
+  r: Graphic or Canvas to draw object on. p5.renderer object. If nothing passed then default renderer is used.```
 ---
 
 ## Examples ##
@@ -98,8 +109,37 @@ function draw(){
   }  
 ```
 ---
+## Example Page ##
+The example page contains a canvas on the left encapsulated within a black outlined box with a single InAndOut object within it instantiated with the default attributes contained within the html form located on the right of the screen.
 
+X Position controls the x position of the object from the canvas origin.
+
+Y Position controls the y position of the object from the canvas origin.
+
+Side Length controls the length of the sides of the outer most triangle.
+
+Recursion Depth controls the amount of recursion calls every frame. Large values may cause performance to dramatically decrease.
+
+Colour controls the RGB colour of the outer most triangle as a comma delimited string. A single value will be interpreted as greyscale and values above or below 255 or 0 respectively will instead be interpreted as these max or min values.
+
+Colour Fade controls the amount added to the colour value of each recursive triangle each recursive call. Similar restrictions with value boundaries and format apply.
+
+Line Weight controls the line weight of the triangles.
+
+Animation Time controls the time for one complete oscillation to be completed in milliseconds.
+
+Master Time controls the time for one complete rotation of the object in milliseconds. By default this is 0 so the object will not be rotating.
+
+---
 ## Original Source ##
 
 [Original Source in Processing here](https://www.openprocessing.org/sketch/563267)
 ---
+---
+## License
+```
+"In and out" by GabrielNoldorin http://www.openprocessing.org/sketch/563267  
+Licensed under Creative Commons Attribution ShareAlike
+https://creativecommons.org/licenses/by-sa/3.0
+https://creativecommons.org/licenses/GPL/2.0/
+```

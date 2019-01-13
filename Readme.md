@@ -54,7 +54,12 @@ Animation in p5 that generates a recursive "triangle-within-triangle" structure 
   colour_fade: Value to add to colour each recursive call.
   r: Graphic or Canvas to draw object on. p5.renderer object. If nothing passed then default renderer is used.
 ```
-
+#### getters/setters
+```
+  Object contains functions to get and set attributes defined in constructor. (see Arguments -> constructor for attribute names)
+  Getters are of the format get_XXX() where XXX is the class attribute.
+  Setters are of the format set_XXX(_) where XXX is the class attribute and _ is the value to set.
+```
 ---
 
 ## Examples ##

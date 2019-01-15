@@ -23,50 +23,64 @@ class InAndOut {
 		this.master_rotate = master_rotate;
 	}
 
-	draw(r=null) // TODO: p5 optional renderer
+	draw(r=null)
 	{
 		/*
       	Call this function in the p5 draw() master function in order to draw and update the InAndOut object every frame.
     	*/
-		let colour = this.colour; // Place this.colour in a local variable so to avoid changing original value if colour_fade enabled
-		let level = this.level; // Likewise, place this.level in a local variable so original value is remembered.
+		let colour = this.colour; 
 		w_strokeWeight(this.line_weight, r); // Set thickness of the line
 		let animation_ratio = 2*PI/this.animation_time; // Determine value to multiply ratio by. PI/time
 
 		// Translate to centre of screen and then rotate before then translating back to origin.
-		w_translate(this.x_pos+this.length/2, this.y_pos - 0.5*(this.length/2 * tan(PI/3)), r);
-		w_rotate(2*PI/this.master_rotate*millis(), r);
-		w_translate(-(this.x_pos+this.length/2), -this.y_pos + 0.5*(this.length/2 * tan(PI/3)), r);
+		// Only rotate if master rotate enabled to save time
+		if (this.master_rotate > 0) {
+			w_translate(this.x_pos+this.length/2, this.y_pos - 0.5*(this.length/2 * tan(PI/3)), r);
+			w_rotate(2*PI/this.master_rotate*millis(), r);
+			w_translate(-(this.x_pos+this.length/2), -this.y_pos + 0.5*(this.length/2 * tan(PI/3)), r);
+		}
 
-		// Call harom function
-		this.harom(this.x_pos + this.length, this.y_pos, this.x_pos, this.y_pos, level, (sin(animation_ratio*millis()%(2*PI))+1)/2, colour, this.colour_fade, r);
-	}
+		// Get starting values at start of frame
+		let ax = this.x_pos + this.length;
+		let ay = this.y_pos;
+		let bx = this.x_pos;
+		let by = this.y_pos;
+		let ratio = (sin(animation_ratio*millis()%(2*PI))+1)/2; // Calculate ratio to multiply by each iteration
 
-	harom(ax, ay, bx, by, level, ratio, colour, colour_fade, r=null)
-	{
-		w_stroke(colour, r); // Set colour of line
-		if(level!=0) // If level > 0 then continue recursive operation
-		{
-			// Calculate new coordinates of triangle points
+		for (var l = 0; l < this.level; l++) { // Loop for "recursion depth"
+			w_stroke(colour, r) // Set stroke colour to new value (for colour fade updating)
+
+			// Calculate c point coordinates
 			let vx=bx-ax;
 			let vy=by-ay;
 			let nx=cos(PI/3)*vx-sin(PI/3)*vy;
 			let ny=sin(PI/3)*vx+cos(PI/3)*vy;
 			let cx=ax+nx;
 			let cy=ay+ny;
-			// Draw lines from point to point
+
+			// Draw triangle
 			w_line(ax,ay,bx,by, r);
 			w_line(ax,ay,cx,cy, r);
 			w_line(cx,cy,bx,by, r);
 
-			// Add colour_fade to colour elementwise
-			let n_colour = [0, 0, 0];
-			n_colour[0] = colour[0] + colour_fade[0];
-			n_colour[1] = colour[1] + colour_fade[1];
-			n_colour[2] = colour[2] + colour_fade[2];
+			// Store ratio applied cooridnates in temporary values
+			let _ax = ax*ratio+cx*(1-ratio);
+			let _ay = ay*ratio+cy*(1-ratio);
+			let _bx = ax*(1-ratio)+bx*ratio;
+			let _by = ay*(1-ratio)+by*ratio;
 
-			// Call harom recursively with updated arguments
-			this.harom(ax*ratio+cx*(1-ratio),ay*ratio+cy*(1-ratio),ax*(1-ratio)+bx*ratio,ay*(1-ratio)+by*ratio,level-1,ratio, n_colour, colour_fade, r);
+			// Place temp in variable
+			ax = _ax;
+			bx = _bx;
+			ay = _ay;
+			by = _by;
+
+			// Update colour
+			let n_colour = [0,0,0]; // For some reason I cannot add directly to array so create temp
+			for (var rgb = 0; rgb < 3; rgb++) {
+				n_colour[rgb] = colour[rgb] + this.colour_fade[rgb];
+			}
+			colour = n_colour;
 		}
 	}
 

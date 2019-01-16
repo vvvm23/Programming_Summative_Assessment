@@ -101,7 +101,7 @@ class InAndOut {
 	set_length(_) {if (!Number.isNaN(_) && _ >= 1) {this.length = _;}}
 	set_level(_) {if (!Number.isNaN(_) && _ >= 1) {this.level = _;}}
 	set_colour(_) {if (!Number.isNaN(_[0]) && !Number.isNaN(_[1]) && !Number.isNaN(_[2]) && _[0] >= 0 && _[1] >= 0 && _[2] >= 0) {this.colour = _;}}
-	set_colour_fade(_) {if (!Number.isNaN(_[0]) && !Number.isNaN(_[1]) && !Number.isNaN(_[2]) && _[0] >= 0 && _[1] >= 0 && _[2] >= 0) {this.colour_fade = _;}}
+	set_colour_fade(_) {if (!Number.isNaN(_[0]) && !Number.isNaN(_[1]) && !Number.isNaN(_[2])) {this.colour_fade = _;}}
 	set_line_weight(_) {if (!Number.isNaN(_) && _ >= 1) {this.line_weight = _;}}
 	set_animation_time(_) {if (!Number.isNaN(_) && _ >= 1) {this.animation_time = _;}}
 	set_master_rotate(_) {if (!Number.isNaN(_) && _ >= 1) {this.master_rotate = _;}}
